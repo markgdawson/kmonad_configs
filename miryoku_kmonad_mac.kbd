@@ -13,7 +13,7 @@
              x    c    v         m    ,    . )
              
 (deflayer U_BASE
-  XX    q     w     f     p     b     j     l     u     y     scln   XX
+  XX    q     w     f     p     b     j     l     u     y ' XX
   XX    (tap-hold-next-release 200 a met) (tap-hold-next-release 200 r alt) (tap-hold-next-release 200 s ctl) (tap-hold-next-release 200 t sft) g     m (tap-hold-next-release 200 n sft)
   (tap-hold-next-release 200 e ctl) (tap-hold-next-release 200 i alt) (tap-hold-next-release 200 o met) XX
   (tap-hold-next-release 200 z (layer-toggle U_BUTTON)) x c     d     v     XX    XX    k     h     ,     (tap-hold-next-release 200 . ralt) (tap-hold-next-release 200 / (layer-toggle U_BUTTON))
