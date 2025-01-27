@@ -1,15 +1,10 @@
 ;; Copyright 2021 Manna Harbour
 ;; github.com/manna-harbour/miryoku
        
-       
-       
-       
-       
 (defcfg
   input (iokit-name )
   output (kext)
-  fallthrough true
-)
+  fallthrough true)
 
 (defsrc
   1     2    3    4    5    6    8    9    0    -    =    del
