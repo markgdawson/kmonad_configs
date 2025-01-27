@@ -1,0 +1,103 @@
+;; Copyright 2021 Manna Harbour
+;; github.com/manna-harbour/miryoku
+       
+       
+       
+       
+       
+(defcfg
+  input (iokit-name )
+  output (kext)
+  fallthrough true
+)
+
+(defsrc
+  1     2    3    4    5    6    8    9    0    -    =    del
+  tab   q    w    e    r    t    i    o    p    [    ]    \  
+  caps  a    s    d    f    g    j    k    l    scln '    ret
+             x    c    v         m    ,    .)
+
+(defalias a_met (tap-hold-next-release 200 a met)
+        r_alt (tap-hold-next-release 200 r alt)
+        s_ctl (tap-hold-next-release 200 s ctl)
+        t_sft (tap-hold-next-release 200 t sft)
+        n_sft (tap-hold-next-release 200 n sft)
+        e_ctl (tap-hold-next-release 200 a ctl)
+        a_alt (tap-hold-next-release 200 a alt)
+        o_met (tap-hold-next-release 200 a met)
+        x_ubt (tap-hold-next-release 200 x (layer-toggle U_BUTTON))
+        c_rlt (tap-hold-next-release 200 c ralt)
+        d_rlt (tap-hold-next-release 200 . ralt)
+        fs_ubt (tap-hold-next-release 200 / (layer-toggle U_BUTTON)))
+        
+             
+(deflayer U_BASE
+  XX    q     w     f     p     b     j     l     u     y     scln   XX
+  XX    a_met r_alt s_ctl t_sft g     m     n_sft e_ctl i_alt o_met  XX
+  z_ubt x_rlt c     d     v     XX    XX    k     h     ,     d_rlt  fs_ubt
+	(tap-hold-next-release 200 esc (layer-toggle U_MEDIA))	(tap-hold-next-release 200 spc (layer-toggle U_NAV))	(tap-hold-next-release 200 tab (layer-toggle U_MOUSE))	(tap-hold-next-release 200 ent (layer-toggle U_SYM))	(tap-hold-next-release 200 bspc (layer-toggle U_NUM))	(tap-hold-next-release 200 del (layer-toggle U_FUN))
+)
+(deflayer U_EXTRA
+XX q	w	e	r	t	y	u	i	o	p XX
+XX (tap-hold-next-release 200 a met)	(tap-hold-next-release 200 s alt)	(tap-hold-next-release 200 d ctl)	(tap-hold-next-release 200 f sft)	g	h	(tap-hold-next-release 200 j sft)	(tap-hold-next-release 200 k ctl)	(tap-hold-next-release 200 l alt)	(tap-hold-next-release 200 ' met)
+(tap-hold-next-release 200 z (layer-toggle U_BUTTON))	(tap-hold-next-release 200 x ralt) XX	c	v	b	n	m XX XX	,	(tap-hold-next-release 200 . ralt)	(tap-hold-next-release 200 / (layer-toggle U_BUTTON))
+		(tap-hold-next-release 200 esc (layer-toggle U_MEDIA))	(tap-hold-next-release 200 spc (layer-toggle U_NAV))	(tap-hold-next-release 200 tab (layer-toggle U_MOUSE))	(tap-hold-next-release 200 ent (layer-toggle U_SYM))	(tap-hold-next-release 200 bspc (layer-toggle U_NUM))	(tap-hold-next-release 200 del (layer-toggle U_FUN))
+;
+)
+(deflayer U_TAP
+XX q	w	f	p	b	j	l	u	y	' XX
+XX a	r	s	t	g	m	n	e	i	o XX
+z	x	c	d	v  XX XX	k	h	,	.	/
+		esc	spc	tab	ent	bspc	del
+;
+)
+
+(deflayer U_BUTTON
+XX M-z	M-x	M-c	M-v	S-M-z	S-M-z	M-v	M-c	M-x	M-z XX
+XX met	alt	ctl	sft	XX	XX	sft	ctl	alt	met XX
+M-z	M-x	M-c	M-v	S-M-z XX XX	S-M-z	M-v	M-c	M-x	M-z
+		#(kp* kp5)	#(kp/ kp5)	#(kp- kp5)	#(kp- kp5)	#(kp/ kp5)	#(kp* kp5)
+;
+)
+(deflayer U_NAV
+XX XX	(layer-switch U_TAP)	(layer-switch U_EXTRA)	(layer-switch U_BASE)	XX	S-M-z	M-v	M-c	M-x	M-z XX
+XX met	alt	ctl	sft	XX	left	down	up	right	caps XX
+XX	ralt	(layer-switch U_NUM)	(layer-switch U_NAV)	XX XX XX	home	pgdn	pgup	end	ins
+		XX	XX	XX	ent	bspc	del
+;
+)
+(deflayer U_MOUSE
+XX XX	(layer-switch U_TAP)	(layer-switch U_EXTRA)	(layer-switch U_BASE)	XX	S-M-z	M-v	M-c	M-x	M-z XX
+XX met	alt	ctl	sft	XX	kp4	kp2	kp8	kp6	XX XX
+XX	ralt	(layer-switch U_SYM)	(layer-switch U_MOUSE)	XX XX XX	XX	XX	XX	XX	XX
+		XX	XX	XX	#(kp- kp5)	#(kp/ kp5)	#(kp* kp5)
+;
+)
+(deflayer U_MEDIA
+XX XX	(layer-switch U_TAP)	(layer-switch U_EXTRA)	(layer-switch U_BASE)	XX	XX	XX	XX	XX	XX XX
+XX met	alt	ctl	sft	XX	previoussong	vold	volu	nextsong	XX XX
+XX	ralt	(layer-switch U_FUN)	(layer-switch U_MEDIA) XX XX	XX	XX	XX	XX	XX	XX
+		XX	XX	XX	stopcd	playpause	mute
+;
+)
+(deflayer U_NUM
+XX [	7	8	9	]	XX	(layer-switch U_BASE)	(layer-switch U_EXTRA)	(layer-switch U_TAP)	XX XX
+XX ;	4	5	6	=	XX	sft	ctl	alt	met XX
+`	1	2	3	\\	XX XX XX	(layer-switch U_NUM)	(layer-switch U_NAV)	ralt	XX
+		.	0	-	XX	XX	XX
+;
+)
+(deflayer U_SYM
+XX {	&	*	\(	}	XX	(layer-switch U_BASE)	(layer-switch U_EXTRA)	(layer-switch U_TAP)	XX XX
+XX :	$	%	^	+	XX	sft	ctl	alt	met XX
+~	!	@	#	| XX XX	XX	(layer-switch U_SYM)	(layer-switch U_MOUSE)	ralt	XX
+		\(	\)	\_	XX	XX	XX
+;
+)
+(deflayer U_FUN
+XX f12	f7	f8	f9	sysrq	XX	(layer-switch U_BASE)	(layer-switch U_EXTRA)	(layer-switch U_TAP)	XX XX
+XX f11	f4	f5	f6	slck	XX	sft	ctl	alt	met XX
+f10	f1	f2	f3	pause XX XX	XX	(layer-switch U_FUN)	(layer-switch U_MEDIA)	ralt	XX
+		comp	spc	tab	XX	XX	XX
+;
+)
