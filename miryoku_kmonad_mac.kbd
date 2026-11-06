@@ -6,11 +6,15 @@
   output (kext)
   fallthrough true)
 
+(defalias
+  spf (tap-macro-release f19 f20))
+
 (defsrc
   1     2    3    4    5    6    8    9    0    -    =    del
-  tab   q    w    e    r    t    i    o    p    [    ]    \  
+  tab   q    w    e    r    t    i    o    p    [    ]    \
   caps  a    s    d    f    g    j    k    l    scln '    ret
-             x    c    v         m    ,    . )
+             x    c    v         m    ,    .
+  spc )
              
 (deflayer U_BASE
   XX    q     w     f     p     b     j     l     u     y ' XX
@@ -18,6 +22,7 @@
   (tap-hold-next-release 200 e ctl) (tap-hold-next-release 200 i alt) (tap-hold-next-release 200 o met) XX
   (tap-hold-next-release 200 z (layer-toggle U_BUTTON)) x c     d     v     XX    XX    k     h     ,     (tap-hold-next-release 200 . ralt) (tap-hold-next-release 200 / (layer-toggle U_BUTTON))
 	(tap-hold-next-release 200 esc (layer-toggle U_MEDIA))	(tap-hold-next-release 200 spc (layer-toggle U_NAV))	(tap-hold-next-release 200 tab (layer-toggle U_MOUSE))	(tap-hold-next-release 200 del (layer-toggle U_SYM)) (tap-hold-next-release 200 ent (layer-toggle U_NUM))		(tap-hold-next-release 200 bspc (layer-toggle U_FUN))
+  @spf
 )
 
 (deflayer U_TAP
@@ -25,6 +30,7 @@ XX q	w	f	p	b	j	l	u	y	' XX
 XX a	r	s	t	g	m	n	e	i	o XX
 z	x	c	d	v  XX XX	k	h	,	.	/
 		esc	spc	tab	del ent	bspc
+  @spf
 )
 
 (deflayer U_BUTTON
@@ -32,40 +38,47 @@ XX M-z	M-x	M-c	M-v	S-M-z	S-M-z	M-v	M-c	M-x	M-z XX
 XX met	alt	ctl	sft	XX	XX	sft	ctl	alt	met XX
 M-z	M-x	M-c	M-v	S-M-z XX XX	S-M-z	M-v	M-c	M-x	M-z
 		#(kp* kp5)	#(kp/ kp5)	#(kp- kp5)	#(kp- kp5)	#(kp/ kp5)	#(kp* kp5)
+  @spf
 )
 (deflayer U_NAV
-XX XX	(layer-switch U_TAP)	XX	(layer-switch U_BASE)	XX	S-M-z	M-v	M-c	M-x	M-z XX
+XX XX	XX	XX	(layer-switch U_BASE)	XX	S-M-z	M-v	M-c	M-x	M-z XX
 XX met	alt	ctl	sft	XX  caps	left	down	up	right XX
-XX	ralt	(layer-switch U_NUM)	(layer-switch U_NAV)	XX XX XX ins	home	pgdn	pgup	end
+XX	ralt	XX	XX	XX XX XX ins	home	pgdn	pgup	end
 		XX	XX	XX	del ent	bspc
+  @spf
 )
 (deflayer U_MOUSE
-XX XX	(layer-switch U_TAP)	XX	(layer-switch U_BASE)	XX	S-M-z	M-v	M-c	M-x	M-z XX
+XX XX	XX	XX	(layer-switch U_BASE)	XX	S-M-z	M-v	M-c	M-x	M-z XX
 XX met	alt	ctl	sft	XX	kp4	kp2	kp8	kp6	XX XX
-XX	ralt	(layer-switch U_SYM)	(layer-switch U_MOUSE)	XX XX XX	XX	XX	XX	XX	XX
+XX	ralt	XX	XX	XX XX XX	XX	XX	XX	XX	XX
 		XX	XX	XX	#(kp- kp5)	#(kp/ kp5)	#(kp* kp5)
+  @spf
 )
 (deflayer U_MEDIA
-XX XX	(layer-switch U_TAP)	XX	(layer-switch U_BASE)	XX	XX	XX	XX	XX	XX XX
+XX XX	XX	XX	(layer-switch U_BASE)	XX	XX	XX	XX	XX	XX XX
 XX met	alt	ctl	sft	XX	previoussong	vold	volu	nextsong	XX XX
-XX	ralt	(layer-switch U_FUN)	(layer-switch U_MEDIA) XX XX	XX	XX	XX	XX	XX	XX
+XX	ralt	XX	XX XX XX	XX	XX	XX	XX	XX	XX
 		XX	XX	XX	stopcd	playpause	mute
+  @spf
 )
 (deflayer U_NUM
-XX [	7	8	9	]	XX	(layer-switch U_BASE)	XX	(layer-switch U_TAP)	XX XX
+XX [	7	8	9	]	XX	(layer-switch U_BASE)	XX	XX	XX XX
 XX ;	4	5	6	=	XX	sft	ctl	alt	met XX
-`	1	2	3	\\	XX XX XX	(layer-switch U_NUM)	(layer-switch U_NAV)	ralt	XX
+`	1	2	3	\\	XX XX XX	XX	XX	ralt	XX
 		.	0	-	XX	XX	XX
+  @spf
 )
 (deflayer U_SYM
-XX {	&	*	\(	}	XX	(layer-switch U_BASE)	XX	(layer-switch U_TAP)	XX XX
+XX {	&	*	\(	}	XX	(layer-switch U_BASE)	XX	XX	XX XX
 XX :	$	%	^	+	XX	sft	ctl	alt	met XX
-~	!	@	#	| XX XX	XX	(layer-switch U_SYM)	(layer-switch U_MOUSE)	ralt	XX
+~	!	@	#	| XX XX	XX	XX	XX	ralt	XX
 		\(	\)	\_	XX	XX	XX
+  @spf
 )
 (deflayer U_FUN
-XX f12	f7	f8	f9	sysrq	XX	(layer-switch U_BASE)	XX	(layer-switch U_TAP)	XX XX
+XX f12	f7	f8	f9	sysrq	XX	(layer-switch U_BASE)	XX	XX	XX XX
 XX f11	f4	f5	f6	slck	XX	sft	ctl	alt	met XX
-f10	f1	f2	f3	pause XX XX	XX	(layer-switch U_FUN)	(layer-switch U_MEDIA)	ralt	XX
+f10	f1	f2	f3	pause XX XX	XX	XX	XX	ralt	XX
 		comp	spc	tab	XX	XX	XX
+  @spf
 )
